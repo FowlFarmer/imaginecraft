@@ -1,3 +1,18 @@
+# user defined by yours truly.
+
+# keep the folder itself
+# but ignore all files inside it
+image_bank/*.png
+image_bank/*.txt
+
+
+
+
+
+
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

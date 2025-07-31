@@ -1,19 +1,48 @@
-from diffusers import DiffusionPipeline
+from diffusers import StableDiffusionXLPipeline
 import cv2
 import numpy as np
 import torch
+import time
+import os
+
+pipe = StableDiffusionXLPipeline.from_pretrained("segmind/SSD-1B", torch_dtype=torch.float16, use_safetensors=True, variant="fp16")
+pipe.to("cuda")
 
 
 
 
 if __name__ == "__main__":
+    print("CUDA available:", torch.cuda.is_available())
+    print(np.__version__)
     # to cuda
-    pipe = DiffusionPipeline.from_pretrained("Raelina/Raehoshi-illust-XL-5.1").to("cuda")
+    while True:
+        prompt = input("Enter your prompt: ")
+        neg_prompt = "ugly, blurry, poor quality" # Negative prompt here
+        image = pipe(prompt=prompt, negative_prompt=neg_prompt).images[0]
+        print("PIL type:", type(image))  # Should be PIL.Image.Image
+        image = image.convert("RGB")          # 🟢 Ensure RGB mode
+        image_np = np.array(image)
+        print("Numpy array shape:", image_np.shape)
+        print("Numpy array type:", image_np.dtype)
+        print("Numpy array min/max:", image_np.min(), image_np.max())
+        output = cv2.cvtColor(src=image_np, code=cv2.COLOR_RGB2BGR)
+        cv2.imshow("Generated Image", output)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        
+        # Generate dynamic filename with timestamp
+        timestamp = time.strftime("%Y%m%d-%H%M%S")
+        directory = "image_bank"
+        output_name = os.path.join(directory, timestamp + ".png")
+        txt_name = os.path.join(directory, timestamp + ".txt")
 
-    prompt = input("Enter your prompt: ")
-    image = pipe(prompt).images[0]
-    image = np.array(image)
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-    cv2.imshow("Generated Image", image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+        # Save image
+        cv2.imwrite(output_name, output)
+        print(f"Image saved as: {output_name}")
+        
+        # Save prompt to text file
+        with open(txt_name, 'w') as f:
+            f.write(f"Prompt: {prompt}\n")
+            f.write(f"Negative Prompt: {neg_prompt}\n")
+            f.write(f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        print(f"Prompt saved as: {txt_name}")
