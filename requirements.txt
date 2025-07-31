@@ -8,7 +8,9 @@
 diffusers
 transformers
 accelerate #(auto installs CUDAless torch - be careful)
+
 # Other essentials
 Pillow
+kornia
 numpy==1.26.4
 opencv-python

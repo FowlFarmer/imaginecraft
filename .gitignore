@@ -2,8 +2,8 @@
 
 # keep the folder itself
 # but ignore all files inside it
-image_bank/*.png
-image_bank/*.txt
+image_bank/test/*
+image_bank/train/*
 
 
 
