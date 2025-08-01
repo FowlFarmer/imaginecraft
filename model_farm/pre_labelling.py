@@ -20,7 +20,8 @@ def generate_dataset():
     img_generator = ImageGenerator()
     with open(input_dataset, 'r') as csvfile: # To optimize vram, do all imagen then do all rmbg
         reader = csv.reader(csvfile)
-        for row in reader[1:]:  # Skip header row
+        header = next(reader, None)  # Skip header row
+        for row in reader:  # Skip header row
             name = row[0]
             prompt = row[2]
             print(f"Generating images for item {name} prompt: {prompt}")
