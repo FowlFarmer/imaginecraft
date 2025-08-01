@@ -10,7 +10,8 @@ transformers
 accelerate #(auto installs CUDAless torch - be careful)
 
 # Other essentials
-Pillow
+pillow
 kornia
 numpy==1.26.4
-opencv-python
+opencv-python==4.11.0.86
+timm

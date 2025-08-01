@@ -25,8 +25,7 @@ class BackgroundRemover:
 
     def remove_background(self, image):
         # Convert OpenCV image (BGR) back to PIL Image (RGB)
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        pil_image = Image.fromarray(image_rgb)
+        pil_image = self.cv2_to_pil(image)
 
         # Prepare image for background removal model
         input_images = self.transform_image(pil_image).unsqueeze(0).to('cuda')
@@ -68,7 +67,7 @@ class BackgroundRemover:
             return
 
         # Remove background
-        pil_image = self.remove_background(self.cv2_to_pil(image))
+        pil_image = self.remove_background(image)
         
         # Convert back to OpenCV format
         output_image = self.pil_to_cv2(pil_image)
@@ -87,6 +86,7 @@ class BackgroundRemover:
 
 
 if __name__ == "__main__":
+    print("Note: Using this model requires an access token from Hugging Face. Use the cli command `huggingface-cli login` to authenticate.")
     remover = BackgroundRemover()
     remover.test()
 
