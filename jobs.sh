@@ -16,10 +16,10 @@ build_venv() {
     
     # Dummy command 2: Create virtual environment
     echo "Creating virtual environment..."
-    python3 -m venv venv
+    python3 -m venv /tmp/venv
     sleep 1
 
-    source venv/bin/activate
+    source /tmp/venv/bin/activate
     sleep 1
     
     pip3 install --upgrade pip
