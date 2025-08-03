@@ -31,7 +31,7 @@ def generate_dataset():
             # Generate images
             for i in range(5):
                 output_name = f"{name}_{str(i)}.png"
-		        output_path = os.path.join(output_dir, output_name)
+                output_path = os.path.join(output_dir, output_name)
                 if output_name in pregenerated_filenames:
                     print(f"Image {output_name} already exists, skipping generation.")
                     continue
