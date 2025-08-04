@@ -16,9 +16,6 @@ class ImageGenerator:
         print("PIL type:", type(image))  # Should be PIL.Image.Image
         image = image.convert("RGB")          # 🟢 Ensure RGB mode
         image_np = np.array(image)
-        # print("Numpy array shape:", image_np.shape)
-        # print("Numpy array type:", image_np.dtype)
-        # print("Numpy array min/max:", image_np.min(), image_np.max())
         output = cv2.cvtColor(src=image_np, code=cv2.COLOR_RGB2BGR)
         return output
 
@@ -38,7 +35,7 @@ class ImageGenerator:
 
             # Generate dynamic filename with timestamp
             timestamp = time.strftime("%Y%m%d-%H%M%S")
-            directory = "/home/fowlfarmer/image_bank"
+            directory = input("Enter the directory to save the image: ")
             output_name = os.path.join(directory, timestamp + ".png")
             txt_name = os.path.join(directory, timestamp + ".txt")
 

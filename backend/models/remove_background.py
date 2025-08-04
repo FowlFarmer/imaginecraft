@@ -59,7 +59,7 @@ class BackgroundRemover:
         print(np.__version__)
 
         # Load an image
-        image_path = input("Enter the path to the image: ")
+        image_path = input("(note: saves to this dir) Enter the path to the image: ")
         directory = os.path.dirname(image_path)
         image = cv2.imread(image_path)
         if image is None:
