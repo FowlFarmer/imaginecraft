@@ -38,7 +38,7 @@ class ImageGenerator:
 
             # Generate dynamic filename with timestamp
             timestamp = time.strftime("%Y%m%d-%H%M%S")
-            directory = "image_bank/test"
+            directory = "/home/fowlfarmer/image_bank"
             output_name = os.path.join(directory, timestamp + ".png")
             txt_name = os.path.join(directory, timestamp + ".txt")
 
@@ -47,10 +47,10 @@ class ImageGenerator:
             print(f"Image saved as: {output_name}")
             
             # Save prompt to text file
-            with open(txt_name, 'w') as f:
-                f.write(f"Prompt: {prompt}\n")
-                f.write(f"Negative Prompt: {neg_prompt}\n")
-                f.write(f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+            # with open(txt_name, 'w') as f:
+            #     f.write(f"Prompt: {prompt}\n")
+            #     f.write(f"Negative Prompt: {neg_prompt}\n")
+            #     f.write(f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
             print(f"Prompt saved as: {txt_name}")
 
 
