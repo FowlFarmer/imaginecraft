@@ -3,7 +3,6 @@
 # keep the folder itself
 # but ignore all files inside it
 **/image_bank/** 
-**/image_bank/** 
 
 
 
